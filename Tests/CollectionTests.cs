@@ -1,5 +1,5 @@
 using FluentAssertions;
-using static RijksmuseumApiTest.API.CollectionApi;
+using RijksmuseumApiTest.API;
 
 namespace RijksmuseumApiTest.Tests;
 
@@ -7,17 +7,29 @@ namespace RijksmuseumApiTest.Tests;
 [TestFixture]
 public class CollectionTests
 {
+    private static readonly int NumberOfResults = 50;
 
-    [TestCase("en", "involvedMaker", "George Hendrik Breitner"), Category("Collection")]
-    public void UserCanRetrieveCollectionWithSearchParam(string culture, string key, string searchParam)
+    [TestCase("en", "George Hendrik Breitner", 5602), Category("Collection")]
+    [TestCase("en", "Breitner", 0), Category("Collection")]
+    public void UserCanRetrieveCollectionWithMaker(string culture, string involvedMaker, int expectedCount)
     {
         var queryParams = new List<KeyValuePair<string, object>>
         {
-            new(key, searchParam.Replace(' ', '+')),
+            new("involvedMaker", involvedMaker),
+            new("ps", NumberOfResults),
         };
 
-        var collection = GetCollection(culture, queryParams);
+        var collection = CollectionApi.GetCollection(culture, queryParams);
 
-        collection.Should().NotBeNull();
+        Assert.Multiple(() =>
+        {
+            collection.Count.Should().Be(expectedCount);
+            if (expectedCount > 0)
+            {
+                collection.ArtObjects.Count.Should().Be(NumberOfResults);
+                collection.ArtObjects.First().PrincipalOrFirstMaker.Should().Be(involvedMaker);
+                collection.ArtObjects.Last().PrincipalOrFirstMaker.Should().Be(involvedMaker);
+            };
+        });
     }
 }

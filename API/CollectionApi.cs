@@ -21,7 +21,7 @@ public class CollectionApi : BaseApiConfig
             .When()
             .Get($"{culture}/collection")
             .Then()
-            .StatusCode(200)
+            .StatusCode(HttpStatusCode.OK)
             .DeserializeTo(typeof(CollectionResponse));
     }
 }
