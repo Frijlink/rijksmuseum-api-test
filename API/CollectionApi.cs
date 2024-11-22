@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using RijksmuseumApiTest.Contracts.Collection;
 
 namespace RijksmuseumApiTest.API;
@@ -9,19 +10,10 @@ public class CollectionApi : BaseApiConfig
         List<KeyValuePair<string, object>>? extraParams
     )
     {
-        var defaultParams = new List<KeyValuePair<string, object>> { new("key", Key) };
-        if (extraParams is not null)
-        {
-            defaultParams.AddRange(extraParams);
-        }
+        var response = extraParams is null
+            ? DefaultRequest(Key, $"{culture}/collection", HttpStatusCode.OK)
+            : DefaultRequest(Key, $"{culture}/collection", extraParams, HttpStatusCode.OK);
 
-        return (CollectionResponse)Given()
-            .Spec(GetRequestSpecifications())
-            .QueryParams(defaultParams)
-            .When()
-            .Get($"{culture}/collection")
-            .Then()
-            .StatusCode(HttpStatusCode.OK)
-            .DeserializeTo(typeof(CollectionResponse));
+        return JsonConvert.DeserializeObject<CollectionResponse>(response);
     }
 }
