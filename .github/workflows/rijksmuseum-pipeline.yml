@@ -1,11 +1,10 @@
 name: rijksmuseum-pipeline
 
 on:
-  schedule:
-  # run tests once every week
-  - cron: "0 0 * * Mon"
-
-on: workflow_dispatch
+  workflow_dispatch
+  # schedule:
+  # # run tests once every week
+  # - cron: "0 0 * * Mon"
 
 jobs:
   build:
