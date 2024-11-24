@@ -28,6 +28,18 @@ public class CollectionDetailsTests
     }
 
     [TestCase("nl", "SK-X-358"), Category("CollectionDetails")]
+    public void UserCanRetrieveCollectionDetailsAsXml(string culture, string objectNumber)
+    {
+        var queryParams = new List<KeyValuePair<string, object>>
+        {
+            new("format", "xml"),
+        };
+        var objResponse = RijksMuseumApi.GetCollectionDetailsAsXml(culture, objectNumber, queryParams);
+
+        objResponse.Should().StartWith("<artObjectGetResponse>");
+    }
+
+    [TestCase("nl", "SK-X-358"), Category("CollectionDetails")]
     public void EmptyResponseIsReturnedWhenObjectNumberIsIncorrect(string culture, string objectNumber)
     {
         var objResponse = RijksMuseumApi.GetCollectionDetails(culture, objectNumber);

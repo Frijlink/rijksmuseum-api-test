@@ -30,4 +30,10 @@ public class RijksMuseumApi : BaseApiConfig
 
         return JsonConvert.DeserializeObject<CollectionDetailsResponse>(response);
     }
+
+    public static string GetCollectionDetailsAsXml(
+        string culture,
+        string objectNumber,
+        List<KeyValuePair<string, object>> extraParams
+    ) => DefaultRequest(Key, $"{culture}/collection/{objectNumber}", extraParams, HttpStatusCode.OK);
 }
