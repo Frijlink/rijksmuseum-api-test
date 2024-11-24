@@ -20,7 +20,7 @@ public class CollectionTests
             new("ps", NumberOfResults),
         };
 
-        var collection = CollectionApi.GetCollection(culture, queryParams);
+        var collection = RijksMuseumApi.GetCollection(culture, queryParams);
 
         Assert.Multiple(() =>
         {
@@ -39,16 +39,17 @@ public class CollectionTests
     // While for locale 'en' a preliminary study of the painting is returned
     // [TestCase("nl", "Breitner Gele Rijders", "SK-A-1328"), Category("Collection")]
     [TestCase("en", "Breitner Gele Rijders", "RP-P-1882-A-6064"), Category("Collection")]
-    public void UserCanRetrieveCollectionWithGeneralSearch(string culture, string searchTerm, string objectNumber)
+    [TestCase("en", "Naatje", "RP-T-1950-222(R)"), Category("Collection")]
+    public void UserCanRetrieveCollectionWithGeneralSearch(string culture, string searchTerm, string firstObjectNumber)
     {
         var queryParams = new List<KeyValuePair<string, object>>
         {
             new("q", searchTerm.Replace(' ', '+')),
         };
 
-        var collection = CollectionApi.GetCollection(culture, queryParams);
+        var collection = RijksMuseumApi.GetCollection(culture, queryParams);
 
-        collection.ArtObjects.First().ObjectNumber.Should().Be(objectNumber);
+        collection.ArtObjects.First().ObjectNumber.Should().Be(firstObjectNumber);
     }
 
     // when locale is changed type of object should also change. I.E. painting vs schilderij
@@ -66,7 +67,7 @@ public class CollectionTests
             new("ps", NumberOfResults),
         };
 
-        var collection = CollectionApi.GetCollection(culture, queryParams);
+        var collection = RijksMuseumApi.GetCollection(culture, queryParams);
 
         collection.ArtObjects.Count.Should().Be(expectedNumber);
     }

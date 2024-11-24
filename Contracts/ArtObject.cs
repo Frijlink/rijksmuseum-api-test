@@ -1,9 +1,12 @@
 using System.Text.Json.Serialization;
 
-namespace RijksmuseumApiTest.Contracts.Collection;
+namespace RijksmuseumApiTest.Contracts;
 
 public class ArtObject
 {
+    [JsonPropertyName("id")]
+    public required string Id { get; set; }
+
     [JsonPropertyName("objectNumber")]
     public required string ObjectNumber { get; set; }
 
@@ -12,4 +15,7 @@ public class ArtObject
 
     [JsonPropertyName("principalOrFirstMaker")]
     public required string PrincipalOrFirstMaker { get; set; }
+
+    [JsonPropertyName("language")]
+    public required string Language { get; set; }
 }
