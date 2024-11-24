@@ -8,7 +8,7 @@ public class BaseApiConfig
     public static RequestSpecification GetRequestSpecifications(){
         var logConfig = new LogConfiguration {
             RequestLogLevel = RequestLogLevel.All,
-            ResponseLogLevel = ResponseLogLevel.All,
+            ResponseLogLevel = ResponseLogLevel.OnVerificationFailure,
         };
 
         return new RequestSpecBuilder()
