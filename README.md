@@ -26,5 +26,4 @@ Navigate to https://github.com/Frijlink/rijksmuseum-api-test/actions/workflows/r
 ## TODO LIST ##
 
 - Investigate behaviour on UserCanRetrieveCollectionWithGeneralSearch where the api does not return the same response on RestAssured as it does on Postman
-- Improve and add tests for xml response
 - Add tests for UserSets and UserSetDetails
