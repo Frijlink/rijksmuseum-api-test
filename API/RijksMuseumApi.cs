@@ -1,6 +1,5 @@
 using RijksmuseumApiTest.Contracts.Collection;
 using RijksmuseumApiTest.Contracts.CollectionDetails;
-using RijksmuseumApiTest.Contracts.CollectionDetails.XML;
 using static RijksmuseumApiTest.Helpers.XmlHelper;
 
 namespace RijksmuseumApiTest.API;
@@ -32,7 +31,7 @@ public class RijksMuseumApi : BaseApiConfig
         return response.FromJson<CollectionDetailsResponse>();
     }
 
-    public static CollectionDetailsXmlResponse GetCollectionDetailsAsXml(
+    public static CollectionDetailsResponse GetCollectionDetailsAsXml(
         string culture,
         string objectNumber
     )
@@ -43,6 +42,6 @@ public class RijksMuseumApi : BaseApiConfig
         };
         var response = DefaultRequest(Key, $"{culture}/collection/{objectNumber}", queryParams);
 
-        return response.FromXml<CollectionDetailsXmlResponse>();;
+        return response.FromXml<CollectionDetailsResponse>();;
     }
 }
