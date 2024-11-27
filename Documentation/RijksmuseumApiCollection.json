@@ -5,7 +5,7 @@
     "requests": [
         {
             "v": "8",
-            "endpoint": "https://www.rijksmuseum.nl/api/en/collection?key=<<api-key>>&q=Breitner%2BGele%2BRijders&s=artist",
+            "endpoint": "https://www.rijksmuseum.nl/api/en/collection?key=<<api-key>>&q=Breitner+Gele+Rijders&s=artist",
             "name": "GetCollection",
             "params": [],
             "headers": [],
