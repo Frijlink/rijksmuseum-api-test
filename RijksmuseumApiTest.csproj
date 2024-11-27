@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <NoWarn>CS8603;CS8602;</NoWarn>
+    <NoWarn>CS8603;CS8602;CS8600;</NoWarn>
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>

@@ -1,6 +1,7 @@
-using Newtonsoft.Json;
 using RijksmuseumApiTest.Contracts.Collection;
 using RijksmuseumApiTest.Contracts.CollectionDetails;
+using RijksmuseumApiTest.Contracts.CollectionDetails.XML;
+using static RijksmuseumApiTest.Helpers.XmlHelper;
 
 namespace RijksmuseumApiTest.API;
 
@@ -12,10 +13,10 @@ public class RijksMuseumApi : BaseApiConfig
     )
     {
         var response = extraParams is null
-            ? DefaultRequest(Key, $"{culture}/collection", HttpStatusCode.OK)
-            : DefaultRequest(Key, $"{culture}/collection", extraParams, HttpStatusCode.OK);
+            ? DefaultRequest(Key, $"{culture}/collection")
+            : DefaultRequest(Key, $"{culture}/collection", extraParams);
 
-        return JsonConvert.DeserializeObject<CollectionResponse>(response);
+        return response.FromJson<CollectionResponse>();
     }
 
     public static CollectionDetailsResponse GetCollectionDetails(
@@ -25,15 +26,23 @@ public class RijksMuseumApi : BaseApiConfig
     )
     {
         var response = extraParams is null
-            ? DefaultRequest(Key, $"{culture}/collection/{objectNumber}", HttpStatusCode.OK)
-            : DefaultRequest(Key, $"{culture}/collection/{objectNumber}", extraParams, HttpStatusCode.OK);
+            ? DefaultRequest(Key, $"{culture}/collection/{objectNumber}")
+            : DefaultRequest(Key, $"{culture}/collection/{objectNumber}", extraParams);
 
-        return JsonConvert.DeserializeObject<CollectionDetailsResponse>(response);
+        return response.FromJson<CollectionDetailsResponse>();
     }
 
-    public static string GetCollectionDetailsAsXml(
+    public static CollectionDetailsXmlResponse GetCollectionDetailsAsXml(
         string culture,
-        string objectNumber,
-        List<KeyValuePair<string, object>> extraParams
-    ) => DefaultRequest(Key, $"{culture}/collection/{objectNumber}", extraParams, HttpStatusCode.OK);
+        string objectNumber
+    )
+    {
+        var queryParams = new List<KeyValuePair<string, object>>
+        {
+            new("format", "xml"),
+        };
+        var response = DefaultRequest(Key, $"{culture}/collection/{objectNumber}", queryParams);
+
+        return response.FromXml<CollectionDetailsXmlResponse>();;
+    }
 }
