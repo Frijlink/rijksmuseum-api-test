@@ -34,17 +34,19 @@ public class CollectionTests
         });
     }
 
-    // Locale has an influence on the returned results
-    // On POSTMAN with locale 'nl' the main painting of the Gele Rijders is returned
-    // While for locale 'en' a preliminary study of the painting is returned
-    // [TestCase("nl", "Breitner Gele Rijders", "SK-A-1328"), Category("Collection")]
-    [TestCase("en", "Breitner Gele Rijders", "RP-P-1882-A-6064"), Category("Collection")]
+    // Locale might have an influence on the returned results
+    // url encoding has an influence on the returned results
+    // API expects '+' instead of search term in search
+    // While RestAssured.Net encodes this to '%2B'
+    [TestCase("nl", "Breitner Gele Rijders", "RP-D-2017-40"), Category("Collection")]
+    [TestCase("en", "Breitner Gele Rijders", "RP-T-1948-602"), Category("Collection")]
     [TestCase("en", "Naatje", "RP-T-1950-222(R)"), Category("Collection")]
     public void UserCanRetrieveCollectionWithGeneralSearch(string culture, string searchTerm, string firstObjectNumber)
     {
         var queryParams = new List<KeyValuePair<string, object>>
         {
             new("q", searchTerm.Replace(' ', '+')),
+            new("s", "artist"),
         };
 
         var collection = RijksMuseumApi.GetCollection(culture, queryParams);

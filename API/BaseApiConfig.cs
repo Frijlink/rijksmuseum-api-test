@@ -1,5 +1,6 @@
 using RestAssured.Logging;
 using RestAssured.Request.Builders;
+using static System.Net.HttpStatusCode;
 
 namespace RijksmuseumApiTest.API;
 
@@ -19,7 +20,7 @@ public class BaseApiConfig
             .Build();
     }
 
-    public static string DefaultRequest(string key, string path, HttpStatusCode expectedHttpResponse) =>
+    public static string DefaultRequest(string key, string path, HttpStatusCode expectedHttpResponse = OK) =>
         Given()
             .Spec(GetRequestSpecifications())
             .QueryParam("key", key)
@@ -29,7 +30,7 @@ public class BaseApiConfig
             .StatusCode(expectedHttpResponse)
             .Extract().Body();
 
-    public static string DefaultRequest(string key, string path, List<KeyValuePair<string, object>> extraParams, HttpStatusCode expectedHttpResponse) =>
+    public static string DefaultRequest(string key, string path, List<KeyValuePair<string, object>> extraParams, HttpStatusCode expectedHttpResponse = OK) =>
         Given()
             .Spec(GetRequestSpecifications())
             .QueryParam("key", key)
