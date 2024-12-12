@@ -38,7 +38,7 @@ public class CollectionTests
     // url encoding has an influence on the returned results
     // API expects '+' instead of search term in search
     // While RestAssured.Net encodes this to '%2B'
-    [TestCase("nl", "Breitner Gele Rijders", "RP-D-1984-40-G.H.BREITNER-34"), Category("Collection")]
+    [TestCase("nl", "Breitner Gele Rijders", "RP-D-2017-40"), Category("Collection")]
     [TestCase("en", "Breitner Gele Rijders", "RP-T-1948-602"), Category("Collection")]
     [TestCase("en", "Naatje", "RP-T-1950-222(R)"), Category("Collection")]
     public void UserCanRetrieveCollectionWithGeneralSearch(string culture, string searchTerm, string firstObjectNumber)
