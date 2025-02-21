@@ -10,7 +10,7 @@ public class CollectionTests
     private static readonly int NumberOfResults = 50;
 
     // hardcoded the expected count. I don't expect the Rijks to add a new Breitner to their collection soon
-    [TestCase("en", "George Hendrik Breitner", 5602), Category("Collection")]
+    [TestCase("en", "George Hendrik Breitner", 5605), Category("Collection")]
     [TestCase("en", "Breitner", 0), Category("Collection")]
     public void UserCanRetrieveCollectionWithMaker(string culture, string involvedMaker, int expectedCount)
     {
