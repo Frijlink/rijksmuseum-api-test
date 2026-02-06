@@ -47,6 +47,14 @@ public class SearchFixture : BaseFixture
 
     [TestMethod]
     [TestCategory("Search")]
+    public async Task UserCanSearchWithoutAnyQueryParams()
+    {
+        var response = await RIJKSMUSEUM_CLIENT.GetAsync(string.Empty);
+        var collection = await HttpClientResponseUtil.CheckStatusCode<SearchResponse>(response, HttpStatusCode.OK);
+
+        Assert.IsNotNull(collection);
+        Assert.IsNotNull(collection.OrderedItems);
+    }
 
     [TestMethod]
     [TestCategory("Search")]
