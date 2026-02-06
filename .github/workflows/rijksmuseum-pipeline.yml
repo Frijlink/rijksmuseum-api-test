@@ -23,6 +23,3 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      env:
-        RIJKSMUSEUM_URL: ${{ secrets.RIJKSMUSEUM_URL }}
-        RIJKSMUSEUM_KEY: ${{ secrets.RIJKSMUSEUM_KEY }}
