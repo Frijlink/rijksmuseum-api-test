@@ -6,16 +6,18 @@ public static class HttpClientResponseUtil
 {
     public static async Task<T> CheckStatusCode<T>(HttpResponseMessage response, HttpStatusCode statusCode)
     {
-        var result = response.StatusCode == statusCode;
-
-        if (result)
+        try
         {
-            return await response.Content.ReadFromJsonAsync<T>();
+            Assert.AreEqual(response.StatusCode, statusCode);
         }
-        else
+        catch (Exception)
         {
             throw new AssertFailedException($"response.StatusCode was {response.StatusCode} instead of expected {statusCode}\n{await HttpReport(response)}");
         }
+
+        return response.IsSuccessStatusCode
+            ? await response.Content.ReadFromJsonAsync<T>()
+            : default;
     }
 
     public static async Task<string> HttpReport(HttpResponseMessage respone)
