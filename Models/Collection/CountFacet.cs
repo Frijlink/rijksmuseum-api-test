@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace RijksmuseumApiTest.Contracts.Collection;
+namespace RijksmuseumApiTest.Models.Collection;
 
 public class CountFacet
 {

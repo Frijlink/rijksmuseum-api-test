@@ -1,11 +1,11 @@
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 
-namespace RijksmuseumApiTest.Contracts.CollectionDetails;
+namespace RijksmuseumApiTest.Models;
 
 [Serializable()]
-[XmlRoot(ElementName = "ArtObjectPage")]
-public class ArtObjectPage
+[XmlRoot(ElementName = "ArtObject")]
+public class ArtObject
 {
     [JsonPropertyName("id")]
     [XmlElement("Id")]
@@ -19,15 +19,11 @@ public class ArtObjectPage
     [XmlElement("Title")]
     public required string Title { get; set; }
 
-    [JsonPropertyName("lang")]
-    [XmlElement("Lang")]
-    public required string Lang { get; set; }
-
-    [JsonPropertyName("plaqueDescription")]
-    [XmlElement("PlaqueDescription")]
-    public required string PlaqueDescription { get; set; }
-
     [JsonPropertyName("principalOrFirstMaker")]
     [XmlElement("PrincipalOrFirstMaker")]
     public required string PrincipalOrFirstMaker { get; set; }
+
+    [JsonPropertyName("language")]
+    [XmlElement("Language")]
+    public required string Language { get; set; }
 }

@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 
-namespace RijksmuseumApiTest.Contracts.CollectionDetails;
+namespace RijksmuseumApiTest.Models.CollectionDetails;
 
 [Serializable()]
 [XmlRoot(ElementName = "artObjectGetResponse")]

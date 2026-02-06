@@ -1,19 +1,12 @@
 # Rijksmuseum API Test
 
-Framework in .NET using NUnit and [RestAssured.Net](https://github.com/basdijkstra/rest-assured-net) to test the [Rijksmuseum Data Services](https://data.rijksmuseum.nl/docs/).
+Framework in .NET using MSTest and HttpClient to test the [Rijksmuseum Search API](https://data.rijksmuseum.nl/docs/search).
 
 ## How to run the tests ##
 
-### Environment Variables ###
-
-| key             | value                        |
-|-----------------|------------------------------|
-| RIJKSMUSEUM_URL |"https://www.rijksmuseum.nl/" |
-| RIJKSMUSEUM_KEY |                              |
-
 ### Locally ###
 
-Set the Environment Variables on your machine and run the tests with the following commands:
+Run the tests with the following commands:
 
 * Run all the tests with `dotnet test`
 * Run a single test with `dotnet test --filter "UserCanRetrieveCollectionWithMaker"`
