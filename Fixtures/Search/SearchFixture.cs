@@ -17,14 +17,14 @@ public class SearchFixture : BaseFixture
     // hardcoded the expected count. I don't expect the Rijks to add a new Breitner to their collection soon
     [TestMethod]
     [TestCategory("Search")]
-    [DataRow("creator", "George Hendrik Breitner", 5008, 100)]
-    [DataRow("creator", "Breitner", 5009, 100)]
+    [DataRow("creator", "George Hendrik Breitner", 5121, 100)]
+    [DataRow("creator", "Breitner", 5122, 100)]
     [DataRow("creator", "asdfghj", 0, 0)]
     [DataRow("title", "De Gele Rijders", 4, 4)]
     [DataRow("objectNumber", "SK-A-1328", 1, 1)]
     [DataRow("objectNumber", "SK-A-132*", 11, 11)] // with wildcard
-    [DataRow("creationDate", "1885", 8349, 100)]
-    [DataRow("creationDate", "188?", 7388, 100)] // with wildcard
+    [DataRow("creationDate", "1885", 8462, 100)]
+    [DataRow("creationDate", "188?", 7529, 100)] // with wildcard
     [DataRow("description", "In vliegende vaart rijdt het elitekorps van De Gele Rijders van het duin af.", 1, 1)]
     public async Task UserCanSearchCollectionWithSingleQueryParam(string queryParam, string value, int expectedItems, int expectedPageResults)
     {
