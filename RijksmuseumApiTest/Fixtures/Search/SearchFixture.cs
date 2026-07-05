@@ -3,6 +3,15 @@ using RijksmuseumApiTest.Utils;
 
 namespace RijksmuseumApiTest.Fixtures.Search;
 
+// TODO: Coverage gaps vs the API surface documented below and in the README:
+//       - imageAvailable (bool) filter is never exercised.
+//       - Repeated/multi-value params (technique, material, aboutActor) are untested — blocked by
+//         the IDictionary limitation in UrlUtil (see TODO there).
+//       - Combined/multiple query params in a single request.
+//       - Pagination: no test actually follows collection.Next to page 2, nor asserts Next is null
+//         when totalItems <= page size.
+//       - README open items: UserSets and UserSetDetails endpoints, and the
+//         UserCanRetrieveCollectionWithGeneralSearch discrepancy.
 [TestClass]
 public class SearchFixture : BaseFixture
 {
@@ -15,6 +24,12 @@ public class SearchFixture : BaseFixture
     */
 
     // hardcoded the expected count. I don't expect the Rijks to add a new Breitner to their collection soon
+    // TODO: Exact-count assertions against a live, mutable collection are inherently brittle — the
+    //       museum can (and does) re-catalogue items, which will flip these tests red without any code
+    //       change. Prefer asserting bounds (>= N), stable invariants, or record known-fragile rows
+    //       separately so a data drift is distinguishable from a real regression.
+    // TODO: Assert the shape of returned items too (e.g. each OrderedItem has a non-empty Id/Type),
+    //       not just the counts — a 200 with a malformed body currently passes.
     [TestMethod]
     [TestCategory("Search")]
     [DataRow("creator", "George Hendrik Breitner", 5121, 100)]
@@ -49,7 +64,7 @@ public class SearchFixture : BaseFixture
     [TestCategory("Search")]
     public async Task UserCanSearchWithoutAnyQueryParams()
     {
-        var response = await RIJKSMUSEUM_CLIENT.GetAsync(string.Empty);
+        var response = await RijksmuseumClient.GetAsync(string.Empty);
         var collection = await HttpClientResponseUtil.CheckStatusCode<SearchResponse>(response, HttpStatusCode.OK);
 
         Assert.IsNotNull(collection);

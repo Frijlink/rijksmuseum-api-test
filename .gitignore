@@ -1,4 +1,5 @@
 /.vscode
-/bin/
-/obj/
-ENV.txt
+bin/
+obj/
+TestResults/
+appsettings.local.json

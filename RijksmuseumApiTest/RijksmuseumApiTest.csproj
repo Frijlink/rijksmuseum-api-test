@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- TODO: Globally suppressing the nullable warnings CS8603/CS8602/CS8600 hides real null-deref
+               risks (see HttpClientResponseUtil.CheckStatusCode returning default). Fix the root
+               causes and remove this NoWarn rather than muting the compiler project-wide. -->
+    <NoWarn>CS8603;CS8602;CS8600;</NoWarn>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- TODO: Add a coverage collector (e.g. coverlet.collector) so `dotnet test` can report coverage. -->
+    <!-- TODO: Consider Central Package Management (Directory.Packages.props) to pin versions once. -->
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.7.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="4.2.3" />
+    <PackageReference Include="MSTest.TestFramework" Version="4.2.3" />
+    <PackageReference Include="HttpClientToCurl" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="../appsettings.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="../appsettings.local.json" CopyToOutputDirectory="PreserveNewest" Condition="Exists('appsettings.local.json')" />
+  </ItemGroup>
+
+</Project>
